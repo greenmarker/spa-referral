@@ -2,7 +2,10 @@ package pl.hackerspace.nfz;
 
 public class SpaReferralReader implements ISpaReferralReader {
 
+    public static final String URL = "https://skierowania.nfz.gov.pl/";
+
 	public int getNumberInQueue(String referralId) {
+
 		// TODO Auto-generated method stub
 		return 0;
 	}
