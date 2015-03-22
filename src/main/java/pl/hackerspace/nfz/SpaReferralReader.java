@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.*;
 import java.security.cert.CertificateException;
@@ -22,29 +23,35 @@ public class SpaReferralReader implements ISpaReferralReader {
         HttpsURLConnection.setDefaultSSLSocketFactory(getSocketFactory(CACERTS_FILE_LOCATION, CACERTS_FILE_PASSWORD));
         HttpsURLConnection.setDefaultHostnameVerifier(getAllTrustingHostnameVerifier());
 
-        URL url = new URL(NFZ);
+        // 1. Read jsessionid,
+        String s = readWebpage(NFZ);
+        //s.indexOf("jsessionid");
+        System.out.println(s);
+        String jsessionid = "";
+
+        // 2. Read number in the queue for specified referralId
+        //System.out.println(readWebpage(NFZ + ";jesssionid=" +jsessionid + "?...="+referralId));
+
+
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+    private String readWebpage(String webpageUrl) throws IOException {
         try (BufferedReader in = new BufferedReader(
                 new InputStreamReader(
-                        ((HttpsURLConnection) url.openConnection()).getInputStream()
+                        ((HttpsURLConnection) new URL(webpageUrl).openConnection()).getInputStream()
                 )
-            )){
+        )){
 
             String inputLine;
             while ((inputLine = in.readLine()) != null)
                 System.out.println(inputLine);
             in.close();
 
-            System.out.println(inputLine);
+            return inputLine;
         }
-
-
-
-
-
-
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    }
 
     private SSLSocketFactory getSocketFactory(String certsFileLocation, String certsFilePassword) throws KeyStoreException, IOException, NoSuchAlgorithmException, CertificateException, UnrecoverableKeyException, KeyManagementException {
         // Install the all-trusting trust manager
