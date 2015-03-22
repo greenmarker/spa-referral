@@ -5,5 +5,5 @@ package pl.hackerspace.nfz;
  */
 public interface ISpaReferralReader {
 
-    int getNumberInQueue(String referralId);
+    int getNumberInQueue(String referralId) throws Exception;
 }

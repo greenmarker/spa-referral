@@ -10,7 +10,7 @@ public class SpaReferralReaderTest extends TestCase {
     private static final String TEST_REFERRAL_NUMBER = "07-13-65044-6";
 
     @Test
-    public void testReader(){
+    public void testReader() throws Exception {
         // given
         SpaReferralReader reader = new SpaReferralReader();
 
